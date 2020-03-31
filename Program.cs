@@ -6,9 +6,9 @@ namespace Dur
     {
         //public int horas;
         //public int minutos;
-        public int segundos;
+        public decimal segundos;
 
-        public Duracion(int s)
+        public Duracion(decimal s)
         {
             segundos=s;
         }
@@ -18,10 +18,19 @@ namespace Dur
         }
         public static Duracion operator +(Duracion x, Duracion y)
         {
-            int segundos=x.segundos+y.segundos;
+            decimal segundos=x.segundos+y.segundos;
             return new Duracion(segundos);
         }
-        
+        public static Duracion operator /(Duracion a,Duracion b)
+        {
+            decimal segundos=a.segundos/b.segundos;
+            return new Duracion(segundos);
+        }
+        public static Duracion operator %(Duracion m, Duracion n)
+        {
+            decimal segundos=m.segundos%n.segundos;
+            return new Duracion(segundos);
+        }
 
 
     }
@@ -29,17 +38,23 @@ namespace Dur
     {
         static void Main(string[] args)
         {
-           Duracion Tiempo1= new Duracion(30);
-           Duracion Tiempo2= new Duracion(40);
-          
+           Duracion Tiempo1= new Duracion(3600);
+           Duracion Tiempo2= new Duracion(9000);
+           Duracion ParaMinutos= new Duracion(60);
+           Duracion ParaHora= new Duracion(3600);
+           
+
            Duracion TotalSegundos=Tiempo1+Tiempo2;
+
+           Duracion minutos=TotalSegundos/ParaMinutos;
+           Duracion horas= TotalSegundos/ParaHora;
            
 
            Console.WriteLine("Tiempo 1: "+Tiempo1+" segundos");
            Console.WriteLine("Tiempo 2: "+Tiempo2+" segundos");
            Console.WriteLine("Total: "+TotalSegundos+" segundos");
-
-           
+           Console.WriteLine("Total : "+minutos+" minutos");
+           Console.WriteLine("Total : "+horas+" horas");           
         }
     }
 }
